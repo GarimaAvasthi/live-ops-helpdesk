@@ -1,0 +1,304 @@
+.sidebar {
+  width: 252px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background:
+    linear-gradient(180deg, #0f172a 0%, #111827 54%, #162033 100%);
+  color: white;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset -1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    width 320ms cubic-bezier(.2,.8,.2,1),
+    padding 320ms cubic-bezier(.2,.8,.2,1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 30;
+  flex-shrink: 0;
+}
+
+.sidebar-collapsed {
+  width: 78px;
+  padding: 24px 12px;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 34px;
+  padding: 0 4px;
+  gap: 8px;
+}
+
+.sidebar-collapsed .sidebar-top {
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sidebar-collapsed .sidebar-logo {
+  justify-content: center;
+}
+
+.sidebar-logo h2 {
+  font-size: 17px;
+  letter-spacing: -0.2px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
+.sidebar-collapsed .sidebar-logo h2 {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-logo-icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--blue), #14b8a6);
+  color: white;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 16px 34px rgba(99, 102, 241, 0.24);
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  transform: scale(1.08);
+}
+
+.sidebar-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 12px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.76);
+  transition:
+    transform 190ms cubic-bezier(.2,.8,.2,1),
+    background-color 190ms cubic-bezier(.2,.8,.2,1),
+    color 190ms cubic-bezier(.2,.8,.2,1),
+    padding 320ms cubic-bezier(.2,.8,.2,1),
+    justify-content 320ms cubic-bezier(.2,.8,.2,1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sidebar-collapsed .menu-item {
+  justify-content: center;
+  padding: 13px 0;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+  transform: translateX(3px);
+}
+
+.sidebar-collapsed .menu-item:hover {
+  transform: translateX(0) scale(1.06);
+}
+
+.menu-item.active {
+  background: linear-gradient(135deg, var(--blue), #0f766e);
+  color: white;
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.28);
+}
+
+.menu-item.active p {
+  color: white;
+  font-weight: 650;
+}
+
+.menu-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  transition: background 190ms ease;
+}
+
+.menu-item.active .menu-icon {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.menu-item:hover .menu-icon {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.menu-item p {
+  font-size: 13.5px;
+  font-weight: 550;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 190ms ease, opacity 220ms ease;
+}
+
+.sidebar-collapsed .menu-item p {
+  display: none;
+}
+
+.menu-item:hover p {
+  color: white;
+}
+
+/* ==========================================================================
+   Custom CSS Tooltips for Collapsed Sidebar & Icon Animations
+   ========================================================================== */
+
+.sidebar-collapsed .menu-item {
+  position: relative;
+}
+
+.sidebar-collapsed .menu-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 180ms cubic-bezier(.2,.8,.2,1), transform 180ms cubic-bezier(.2,.8,.2,1);
+  z-index: 999;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-collapsed .menu-item::before {
+  content: "";
+  position: absolute;
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #0f172a transparent transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms cubic-bezier(.2,.8,.2,1), transform 180ms cubic-bezier(.2,.8,.2,1);
+  z-index: 999;
+}
+
+.sidebar-collapsed .menu-item:hover::after,
+.sidebar-collapsed .menu-item:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* Micro-animations for sidebar menu icons on hover */
+.menu-item:hover .menu-icon svg {
+  transform: scale(1.1);
+  transition: transform 250ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Gear rotation for settings */
+.menu-item:hover .menu-icon svg.lucide-settings {
+  animation: spinGear 3s linear infinite;
+}
+@keyframes spinGear {
+  100% { transform: rotate(360deg); }
+}
+
+/* Zap pulse for automation */
+.menu-item:hover .menu-icon svg.lucide-zap {
+  animation: zapPulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes zapPulse {
+  0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0)); }
+  100% { transform: scale(1.15) rotate(15deg); filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6)); }
+}
+
+/* Reports chart lift */
+.menu-item:hover .menu-icon svg.lucide-bar-chart3 {
+  animation: chartLift 0.8s ease-in-out infinite alternate;
+}
+@keyframes chartLift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px) scale(1.05); }
+}
+
+/* Ticket wiggle */
+.menu-item:hover .menu-icon svg.lucide-ticket {
+  animation: ticketWiggle 0.5s ease-in-out infinite alternate;
+}
+@keyframes ticketWiggle {
+  0% { transform: rotate(-10deg) scale(1.05); }
+  100% { transform: rotate(10deg) scale(1.05); }
+}
+
+/* Users bounce */
+.menu-item:hover .menu-icon svg.lucide-users {
+  animation: usersBob 0.8s ease-in-out infinite alternate;
+}
+@keyframes usersBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px) scale(1.05); }
+}
+
+/* Resolved check pulse */
+.menu-item:hover .menu-icon svg.lucide-check-circle2,
+.menu-item:hover .menu-icon svg.lucide-check-circle-2 {
+  animation: checkPulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes checkPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0)); }
+  100% { transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6)); }
+}
