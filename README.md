@@ -3,7 +3,9 @@
 A modern real-time support operations dashboard built for freight and logistics teams to prevent ticket editing conflicts through collaborative WebSocket-based locking. The platform ensures that only one support agent can edit a ticket at a time while all updates, lock states, and agent activities synchronize instantly across connected clients. Designed with an enterprise-style interface, the system delivers fast, reliable, and concurrency-safe ticket management for live operational environments.
 
 ---
-
+# Link to deployments:
+- Vercel- https://live-ops-helpdesk-three.vercel.app/
+- Render- https://live-ops-helpdesk-zogi.onrender.com
 # Features
 
 ## Real-Time Collaborative Locking
